@@ -1,0 +1,89 @@
+import { IProject, UserRole, ProjectStatus } from "./classes/Project"
+import { ProjectsManager } from "./classes/ProjectsManager"
+
+function toggleModal(id: string, toggle: boolean) {
+    const modal = document.getElementById(id)
+    if (modal && modal instanceof HTMLDialogElement && toggle) {
+        modal.showModal()
+    } else if (modal && modal instanceof HTMLDialogElement &&! toggle) {
+        modal.close()
+    } else {
+        console.warn("The provided modal was not found, id: ", id)
+    }
+}
+
+const projectsListUI = document.getElementById("projects-list") as HTMLElement
+const projectsManager = new ProjectsManager(projectsListUI)
+
+// This document object is provided by the browser, and its main purpose is to help us interact with the DOM.
+const modalId = "new-project-modal"
+const newProjectBtn = document.getElementById("new-project-btn")
+if (newProjectBtn) {newProjectBtn.addEventListener("click", () => {toggleModal(modalId, true)})
+} else {
+    console.warn("New Project Button was not found")
+}
+
+const projectForm = document.getElementById("new-project-form")
+if (projectForm && projectForm instanceof HTMLFormElement) {
+    projectForm.addEventListener("submit", (e) => {
+        e.preventDefault()
+        const formData = new FormData(projectForm)
+        const projectData: IProject = {
+            name: formData.get("name") as string,
+            description: formData.get("description") as string,
+            userRole: formData.get("userRole") as UserRole,
+            status: formData.get("status") as ProjectStatus,
+            finishDate: new Date(formData.get("finishDate") as string)
+        }
+        try {
+            const project = projectsManager.newProject(projectData)
+            projectForm.reset()
+            toggleModal(modalId, false)
+        } catch (err) {
+            const popupId = "popup-used-project-name"
+            toggleModal(popupId, true)
+            const popupBtn = document.getElementById("close-popup-btn")
+            if (popupBtn) {popupBtn.addEventListener("click", (e) => {
+                e.preventDefault()
+                toggleModal(popupId, false)})
+            } else {
+                console.warn("New Project Button was not found")
+            }
+                        
+        }        
+    })
+} else {
+    console.warn("The project form couldn't be found, please check the ID.")
+}
+
+if (projectForm && projectForm instanceof HTMLFormElement) {
+    projectForm.addEventListener("reset", (e) => {
+        toggleModal(modalId, false)
+    })
+} else {
+    
+}
+
+const exportProjectsBtn = document.getElementById("download-projects-btn")
+if (exportProjectsBtn) {
+    exportProjectsBtn.addEventListener("click", () => {
+        projectsManager.exportToJSON()
+    })
+}
+
+const importProjectsBtn = document.getElementById("upload-projects-btn")
+if (importProjectsBtn) {
+    importProjectsBtn.addEventListener("click", () => {
+        projectsManager.importFromJSON()
+    })
+}
+
+const projectsPageBtn = document.getElementById("projects-page-btn")
+if (projectsPageBtn) {
+    projectsPageBtn.addEventListener("click", () => {
+        const projectsPage = document.getElementById("projects-page")
+        if (projectsPage) {
+            projectsPage.style.display = "flex"
+        }
+    })
+}
