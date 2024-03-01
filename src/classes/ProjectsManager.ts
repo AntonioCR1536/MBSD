@@ -31,6 +31,8 @@ export class ProjectsManager{
         return project
     }
 
+// New comment
+
     private setDetailsPage(project: Project) {
         const detailsPage = document.getElementById("project-details")
         if(!detailsPage) { return }
