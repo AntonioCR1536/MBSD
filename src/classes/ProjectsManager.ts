@@ -42,33 +42,15 @@ export class ProjectsManager{
         for (const description of descriptions) {
             if (description) {description.textContent = project.description}
         }
-        const code = detailsPage.querySelector("[data-project-code='code']")
-        const projectCode = project.name.slice(0,2).toUpperCase()
-        if (code) {code.textContent = projectCode}
-        const status = detailsPage.querySelector("[data-project-status='status']")
-        if (status) {status.textContent = project.status}
-        const role = detailsPage.querySelector("[data-project-role='role']")
-        if (role) {role.textContent = project.userRole}
-        const date = detailsPage.querySelector("[data-project-date='date']")
-        if (date) {date.textContent = project.finishDate.toDateString()}
-    }
-
-// New comment
-
-    private setDetailsPage(project: Project) {
-        const detailsPage = document.getElementById("project-details")
-        if(!detailsPage) { return }
-        const names = detailsPage.querySelectorAll("[data-project-info='name']")
-        for (const name of names) {
-            if (name) {name.textContent = project.name}
+        const code = document.getElementById("project-code")
+        const projectCode = project.name.slice(0,2)
+        const codeBackgroundColor = project.codeBackgroundColor
+        const codeTextColor = project.codeTextColor
+        if (code) {
+            code.textContent = projectCode
+            code.style.backgroundColor = codeBackgroundColor
+            code.style.color = codeTextColor  
         }
-        const descriptions = detailsPage.querySelectorAll("[data-project-description='description']")
-        for (const description of descriptions) {
-            if (description) {description.textContent = project.description}
-        }
-        const code = detailsPage.querySelector("[data-project-code='code']")
-        const projectCode = project.name.slice(0,2).toUpperCase()
-        if (code) {code.textContent = projectCode}
         const status = detailsPage.querySelector("[data-project-status='status']")
         if (status) {status.textContent = project.status}
         const role = detailsPage.querySelector("[data-project-role='role']")

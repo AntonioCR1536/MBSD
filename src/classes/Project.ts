@@ -24,14 +24,30 @@ export class Project implements IProject {
     cost: 0
     progress: 0
     id: string
+    codeBackgroundColor: string
+    codeTextColor: string
 
     constructor (data: IProject) {        
         // Project properties
         for (const key in data) {
             this[key] = data[key]
         }
+        this.setCodeColors()
         this.setUI()
-        this.id = uuidv4()
+        this.id = uuidv4()        
+    }
+
+    setCodeColors() {
+        const backgroundColors : any[] = ["#5cd6ff", "#EEA7F1", "#FA7A61", "#93F0A3", "#FED148"]
+        const textColors : any[] = ["#004D66", "#DB3DE1", "#FDCDC4", "#0F6C1E", "#7A5C00"]
+        const zipped : any[] = []
+        for(let i = 0; i < backgroundColors.length; i++) {
+            zipped.push([backgroundColors[i], textColors[i]])
+        }
+        const randomIndex = Math.floor(Math.random() * backgroundColors.length)
+        const backgroundColor = backgroundColors[randomIndex]
+        const textColor = textColors[randomIndex]
+        return [this.codeBackgroundColor = backgroundColor, this.codeTextColor = textColor]
     }
 
     setUI() {
@@ -41,7 +57,7 @@ export class Project implements IProject {
         this.ui.className = "project-card"
         this.ui.innerHTML =
         `<div class="card-header">
-            <p style="background-color: #ca8134; padding: 10px; border-radius: 8px; aspect-ratio: 1;">HC</p>
+            <p style="font-size: 20px; color: ${this.codeTextColor}; background-color: ${this.codeBackgroundColor}; aspect-ratio: 1; border-radius: 100%; padding: 12px; display: flex; justify-content: center; align-items: center;">HC</p>
             <div>
                 <h5>${this.name}</h5>
                 <p>${this.description}</p>
