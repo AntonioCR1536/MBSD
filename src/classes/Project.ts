@@ -1,85 +1,94 @@
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from "uuid";
 
 export type ProjectStatus = "Pending" | "Active" | "Finished"
-export type UserRole = "Architect" | "Engineer" | "Developer"
+export type Role =  "Architect" | "Engineer" | "Developer"
+
 
 export interface IProject {
-    name: string
-    description: string
-    status: ProjectStatus
-    userRole: UserRole
-    finishDate: Date
-}
-
-export class Project implements IProject {
-    //Interface defined roperties
-    name: string
-    description: string
-    status: "Pending" | "Active" | "Finished"
-    userRole: "Architect" | "Engineer" | "Developer"
-    finishDate: Date
-
-    //Class internal property
-    ui: HTMLDivElement
-    cost: 0
-    progress: 0
-    id: string
-    codeBackgroundColor: string
-    codeTextColor: string
-
-    constructor (data: IProject) {        
-        // Project properties
-        for (const key in data) {
-            this[key] = data[key]
-        }
-        this.setCodeColors()
-        this.setUI()
-        this.id = uuidv4()        
+        name: string;
+        location: string;
+        description: string;
+        status: ProjectStatus;
+        role: Role;
+        cost: number;
+        finishDate: Date
     }
 
-    setCodeColors() {
-        const backgroundColors : any[] = ["#5cd6ff", "#EEA7F1", "#FA7A61", "#93F0A3", "#FED148"]
-        const textColors : any[] = ["#004D66", "#DB3DE1", "#FDCDC4", "#0F6C1E", "#7A5C00"]
-        const zipped : any[] = []
-        for(let i = 0; i < backgroundColors.length; i++) {
-            zipped.push([backgroundColors[i], textColors[i]])
+    
+    // To satisfy IProject
+    export class Project implements IProject {
+        name: string
+        location: string
+        description: string
+        status: ProjectStatus
+        role: Role
+        cost: number
+        finishDate: Date
+        
+        // Class internals
+        ui: HTMLDivElement
+        progress: number = 0
+        id: string
+        projectColor: string
+        
+        
+        constructor(data: IProject) {
+            for (const key in data) {
+                this[key] = data[key]
+            }
+            // Project data definition
+            this.id = uuidv4()
+            this.projectColor = this.getRandomColor()
+            this.setUI()
         }
-        const randomIndex = Math.floor(Math.random() * backgroundColors.length)
-        const backgroundColor = backgroundColors[randomIndex]
-        const textColor = textColors[randomIndex]
-        return [this.codeBackgroundColor = backgroundColor, this.codeTextColor = textColor]
-    }
 
-    setUI() {
-        // UI Definition
-        if (this.ui && this.ui instanceof HTMLElement) {return}
-        this.ui = document.createElement("div")
-        this.ui.className = "project-card"
-        this.ui.innerHTML =
-        `<div class="card-header">
-            <p style="font-size: 20px; color: ${this.codeTextColor}; background-color: ${this.codeBackgroundColor}; aspect-ratio: 1; border-radius: 100%; padding: 12px; display: flex; justify-content: center; align-items: center;">HC</p>
+        private getRandomColor() {
+            const colors = {
+                0: "#cb7922",
+                1: "#bddd53",
+                2: "#45cebe",
+                3: "#4c81d7",
+                4: "#ca34ac"
+            }
+            const max = Object.keys(colors).length
+            const randNumber = Math.floor(Math.random() * max)
+            return colors[randNumber]
+            }
+        
+        // Project card UI
+        // Creates the project ui
+        
+        
+        setUI() {
+            if(this.ui && this.ui instanceof HTMLElement) {return}
+            this.ui = document.createElement("div")
+            this.ui.className = "project-card"
+            this.ui.innerHTML = `
+            <div class="card-header">
+            <p style="background-color: ${this.projectColor}; padding: 10px; border-radius: 8px; aspect-ratio: 1">${this.name.slice(0,2)}</p>
             <div>
-                <h5>${this.name}</h5>
-                <p>${this.description}</p>
+            <h5>${this.name}</h5>
+            <p>${this.description}</p>
             </div>
             </div>
             <div class="card-content">
             <div class="card-property">
-                <p style="color: #969696;">Status</p>
-                <p>${this.status}</p>
+            <p style="color: #969696;">Status</p>
+            <p>${this.status}</p>
             </div>
             <div class="card-property">
-                <p style="color: #969696;">Role</p>
-                <p>${this.userRole}</p>
+            <p style="color: #969696;">Role</p>
+            <p>${this.role}</p>
             </div>
             <div class="card-property">
-                <p style="color: #969696;">Cost</p>
-                <p>$${this.cost}</p>
+            <p style="color: #969696;">Cost</p>
+            <p>$${this.cost}</p>
             </div>
             <div class="card-property">
-                <p style="color: #969696;">Estimated Progress</p>
-                <p>${this.progress * 100}</p>
+            <p style="color: #969696;">Estimated progress</p>
+            <p>${this.progress * 100}%</p>
             </div>
-        </div>`
+            </div>
+            `
     }
 }

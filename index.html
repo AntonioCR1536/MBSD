@@ -1,153 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,300,0,0" />
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <aside id="sidebar">
-    <img id="company-logo" src="./assets/company-logo.svg" alt="Construction Company">
-    <ul id="nav-buttons">
-      <li id="projects-page-btn"><span class="material-icons-round">apartment</span>Projects</li>
-      <li id="users-page-btn"><span class="material-icons-round">people</span>Users</li>
-    </ul>
-  </aside>
-  <main id="content">
-    <div class="page" id="projects-page" style="display: flex;">
-      <dialog id="new-project-modal">
-        <form id="new-project-form">
-          <h2>New Project</h2>
-          <div class="input-list">
-            <div class="form-field-container">
-              <label><span class="material-icons-round">apartment</span>Name</label>
-              <input name="name" type="text" placeholder="What's the name of your project?">
-              <p style="color: gray; font-size: var(--font-sm); margin-top: 5px; font-style: italic;">TIP: Give it a short name</p>
-            </div>
-            <div class="form-field-container">
-              <label><span class="material-icons-round">subject</span>Description</label>
-              <textarea name="description" cols="30" rows="5" placeholder="Give your project a nice description! So people is jealous about it."></textarea>
-            </div>
-            <div class="form-field-container">
-              <label><span class="material-icons-round">person</span>Role</label>
-              <select name="role">
-                <option>Architect</option>
-                <option>Engineer</option>
-                <option>Developer</option>
-              </select>
-            </div>
-            <div class="form-field-container">
-              <label><span class="material-icons-round">not_listed_location</span>Status</label>
-              <select name="status">
-                <option>Pending</option>
-                <option>Active</option>
-                <option>Finished</option>
-              </select>
-            </div>
-            <div class="form-field-container">
-              <label for="finishDate">
-                <span class="material-icons-round">calendar_month</span>
-                Finish Date
-              </label>
-              <input name="finishDate" type="date" name="finishDate"></input>
-            </div>
-            <div style="display: flex; margin: 10px 0px 10px auto; column-gap: 10px;">
-              <button type="reset" style="background-color: transparent;">Cancel</button>
-              <button type="submit" style="background-color: rgb(18, 145, 18);">Accept</button>
-            </div>
-          </div>
-        </form>
-      </dialog>
-      <dialog id="popup-used-project-name">
-        <form id="used-project-name-form">
-          <p>Project name is in use, try with a different one.</p>
-          <button id="close-popup-btn">OK</button>
-        </form>
-      </dialog>
-      <header>
-        <h2>Projects</h2>
-        <div id="header-btns">
-          <span id="download-projects-btn" class="material-symbols-sharp">download</span>
-          <span id="upload-projects-btn" class="material-symbols-sharp">upload</span>
-          <button id="new-project-btn"><span class="material-icons-round">add</span>New Project</button>
+    <aside id="sidebar">
+        <img id="company-logo" src="./assets/company-logo.svg" alt="Construction Company">
+        <ul id="nav-buttons">
+            <li><span class="material-symbols-outlined">apartment</span>Projects</li>
+            <li><span class="material-symbols-outlined">group</span>People
+            </li>
+        </ul>
+    </aside>
+    <main id="content">
+        <div class="page" id="projects-page">
+            <dialog id="new-project-modal">
+                <form id="new-project-form">
+                    <h2>New project</h2>
+                    <div class="input-list">
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">home</span>Name</label>
+                            <input name="name" type="text">
+                        </div>
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">map</span>Location</label>
+                            <input name="location" type="text">
+                        </div>
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">description</span>Description</label>
+                            <textarea name="description" cols="30" rows="5" placeholder="Give a description to this project"></textarea>
+                        </div>
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">engineering</span>Role</label>
+                            <select name="role">
+                                <option>Architect</option>
+                                <option>Engineer</option>
+                                <option>Developer</option>
+                            </select>
+                        </div>
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">attach_money</span>Cost</label>
+                            <input name="cost" type="number">
+                        </div>
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">clock_loader_60</span>Status</label>
+                            <select name="status">
+                                <option>Pending</option>
+                                <option>Active</option>
+                                <option>Finished</option>
+                            </select>
+                        </div>
+                        <div class="form-field-container">
+                            <label><span class="material-symbols-outlined">event</span>Finish date</label>
+                            <input name="finishDate" type="date" value="01/01/2026">
+                        </div>
+                    </div>
+                    <div id="form-buttons">
+                        <button type="button" id="cancel-button">Cancel</button>
+                        <button type="submit" id="accept-button">Accept</button>
+                    </div>
+                </form>
+            </dialog>
+            <header id="page-header">
+                <h2>Projects</h2>
+                <div style="display: flex; align-items: center; column-gap: 15px">
+                    <button class="download-upload-btn" id="download-project-btn"><span style="font-size: 20px;" class="material-symbols-outlined">download_2</span></button>
+                    <button class="download-upload-btn" id="upload-project-btn"><span style="font-size: 20px;" class="material-symbols-outlined">upload_2</span></button>
+                    <button id="new-project-btn"><span class="material-symbols-outlined">add</span>New Project</button>
+                </div>
+            </header>
+            <div id="projects-list"></div>
         </div>
-      </header>
-      <div id="projects-list">
-      </div>
-    </div>
-    <div class="page" id="project-details" style="display: none">
-      <header>
-        <div>
-          <h2 data-project-info="name">Hospital Center</h2>
-          <p data-project-description="description" style="color: #969696">Community hospital located at downtown</p>
+        <div class="page" id="projects-details-page" style="display: none;">
+            <header>
+                <div>
+                    <h2 contenteditable="true" data-project-info="header-name">Name</h2>
+                    <p contenteditable="true" data-project-info='location' style="color: #969696;">Location</p>
+                </div>
+            </header>
+            <div class="main-page-content">
+                <div style="display: flex; flex-direction: column; row-gap: 30px;">
+                    <div class="dashboard-card">
+                        <div class="dashboard-header">
+                            <p data-project-info="acronym" class="project-acronym" id="project-acronym">AC</p>
+                            <button id="edit">Edit</button>
+                        </div>
+                        <div class="dashboard-description">
+                            <p contenteditable="true" data-project-info="name" style="font-weight: bold; font-size: 20px">Name</p>
+                            <p contenteditable="true" data-project-info="description">Description</p>
+                        </div>
+                        <div class="dashboard-details">
+                            <div class="dashboard-details-item">
+                                <p style="color: #969696;">Status</p>
+                                <p contenteditable="true" data-project-info="status">Status</p>
+                            </div>
+                            <div class="dashboard-details-item">
+                                <p style="color: #969696;">Cost</p>
+                                <p contenteditable="true" data-project-info="cost">Cost</p>
+                            </div>
+                            <div class="dashboard-details-item">
+                                <p style="color: #969696;">Role</p>
+                                <p contenteditable="true" data-project-info="role">Role</p>
+                            </div>
+                            <div class="dashboard-details-item">
+                                <p style="color: #969696;">Finish date</p>
+                                <p contenteditable="true" data-project-info="finishDate">Thu Jan 01 2026</p>
+                            </div>
+                        </div>
+                        <div id="dashboard-progress-bar" style="background-color: #dfdfdf; border-radius: 9999px; overflow: auto;">
+                            <div style="width: 80%; background-color: green; padding: 4px 0; text-align: center;">80%</div>
+                        </div>                      
+                    </div>
+                    <div class="dashboard-card" style="flex-grow: 1;">
+                        <div style="padding: 20px 30px; display: flex; align-items: center; justify-content: space-between;">
+                            <h4>To do</h4>
+                            <div style="display: flex; align-items: center; justify-content: end; column-gap: 20px;">
+                                <div style="display: flex; align-items: center; column-gap: 10px;">
+                                    <span class="material-symbols-outlined">search</span>
+                                    <input type="text" placeholder="Search To do's by name" style="width: 100%;">
+                                </div>
+                                <span class="material-symbols-outlined">add</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; flex-direction: column; padding: 10px 30px; row-gap: 20px;">
+                            <div class="todo-item">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="display: flex; column-gap: 15px; align-items: center;">
+                                        <span class="material-symbols-outlined" style="padding: 10px; background-color:#686868; border-radius: 10px">construction</span>
+                                        <p>Make anything here as you want, even something longer.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="viewer-container" class="dashboard-card" style="flex-grow: 1; min-height: 0; min-width: 0;"></div>
+            </div>
         </div>
-      </header>
-      <div class="main-page-content">
-        <div style="display: flex; flex-direction: column; row-gap: 30px;">
-          <div class="dashboard-card" style="padding: 30px 0;">
-            <div style="display: flex; justify-content: space-between; align-items: center; padding: 0px 30px; margin-bottom: 30px;">
-              <p id="project-code" data-project-code="code" style="font-size: 20px; color: white; background-color: #ca8134; aspect-ratio: 1; border-radius: 100%; padding: 12px; display: flex; justify-content: center; align-items: center;">HC</p>
-              <button class="btn-secondary"><p style="width: 100%;">Edit</p></button>
+        <div class="page" id="people-page" style="display: none;">
+            <header style="display: flex; flex-direction: row">
+                    <select>
+                        <option>Hospital Center</option>
+                        <option>Residential XYZ01</option>
+                        <option>Mad Max Highway</option>
+                    </select>
+                    <span class="material-symbols-outlined" style="font-size: 40px; cursor: pointer;">account_circle</span>
+            </header>
+            <div style="display: flex; flex-grow: 1; flex-direction: column; justify-content: space-between;">
+                <table class="people-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Team</th>
+                            <th>Role</th>
+                            <th>Mail</th>
+                            <th>Phone</th>
+                            <th>Joined in</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="active-row">
+                            <td>Peter Parker</td>
+                            <td>Avengers</td>
+                            <td>Climber</td>
+                            <td>that-spider@mrvl.com</td>
+                            <td>123456789</td>
+                            <td>1994</td>
+                        </tr>
+                        <tr>
+                            <td>Bruce Wayne</td>
+                            <td>Solo Detective</td>
+                            <td>The Bat Man</td>
+                            <td>iambatman@dc.com</td>
+                            <td>987654321</td>
+                            <td>1967</td>
+                        </tr>
+                        <tr>
+                            <td>Hell Boy</td>
+                            <td>BPRD</td>
+                            <td>Paranormal gunslinger</td>
+                            <td>bigredfist@hell.com</td>
+                            <td>666666666</td>
+                            <td>1938</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="display: flex; flex-direction: row; justify-content: flex-end; margin: 30px 30px 20px 0px;">
+                    <button>Export</button>
+                </div>
             </div>
-            <div style="padding: 0 30px;">
-              <div>
-                <h5 data-project-info="name">Hospital Center</h5>
-                <p data-project-description="description">Community hospital located at downtown</p>
-              </div>
-              <div style="display: flex; column-gap: 30px; padding: 30px 0px; justify-content: space-between;">
-                <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Status</p>
-                  <p data-project-status="status">Active</p>
-                </div>
-                <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Cost</p>
-                  <p data-project-cost="cost">$ 2'542.000</p>
-                </div>
-                <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Role</p>
-                  <p data-project-role="role">Engineer</p>
-                </div>
-                <div>
-                  <p style="color: #969696; font-size: var(--font-sm)">Finish Date</p>
-                  <p data-project-date="date">2023-05-01</p>
-                </div>
-              </div>
-              <div style="background-color: #404040; border-radius: 9999px; overflow: auto;">
-                <div style="width: 80%; background-color: green; padding: 4px 0; text-align: center;">80%</div>
-              </div>
-            </div>
-          </div>
-          <div class="dashboard-card" style="flex-grow: 1;">
-            <div style="padding: 20px 30px; display: flex; align-items: center; justify-content: space-between;">
-              <h4>To-Do</h4>
-              <div style="display: flex; align-items: center; justify-content: end; column-gap: 20px;">
-                <div style="display: flex; align-items: center; column-gap: 10px;">
-                  <span class="material-icons-round">search</span>
-                  <input type="text" placeholder="Search To-Do's by name" style="width: 100%;">
-                </div>
-                <span class="material-icons-round">add</span>
-              </div>
-            </div>
-            <div style="display: flex; flex-direction: column; padding: 10px 30px; row-gap: 20px;">
-              <div class="todo-item">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                  <div style="display: flex; column-gap: 15px; align-items: center;">
-                    <span class="material-icons-round" style="padding: 10px; background-color: #686868; border-radius: 10px;">construction</span>
-                    <p>Make anything here as you want, even something longer.</p>
-                  </div>
-                  <p style="text-wrap: nowrap; margin-left: 10px;">Fri, 20 sep</p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        <div id="viewer-container" class="dashboard-card"></div>
-      </div>
-    </div>
-  </main>
-  <script type="module" src="./src/index.ts" ></script>
+    </main>
+    <script type="module" src="./src/index.ts"></script>
 </body>
 </html>
