@@ -158,7 +158,7 @@ spotLightControls.addColor(spotLight, "color")
 
 const objLoader = new OBJLoader()
 const mtlLoader = new MTLLoader()
-const mgltfLoader = new GLTFLoader()
+const gltfLoader = new GLTFLoader()
 
 
 /*mtlLoader.load("../assets/gear/Gear1.mtl", (materials) => {
@@ -169,6 +169,6 @@ const mgltfLoader = new GLTFLoader()
   })
 })*/
 
-mgltfLoader.load("../assets/broccoli/broccoli_v3.gltf", (gltf) => {
+gltfLoader.load("../assets/broccoli/broccoli_v3.gltf", (gltf) => {
     scene.add(gltf.scene)
   })
